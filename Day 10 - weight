@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+// Function to calculate GCD
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+// Function to determine if the weight can be measured
+const char* can_measure_weight(int W, int X, int Y, int Z) {
+    if (W == Z) {
+        return "YES";
+    }
+    
+    int target = W - Z;
+    if (target < 0) {
+        return "NO";
+    }
+
+    int g = gcd(X, Y);
+    return (target % g == 0) ? "YES" : "NO";
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    for (int i = 0; i < T; i++) {
+        int W, X, Y, Z;
+        scanf("%d %d %d %d", &W, &X, &Y, &Z);
+        printf("%s\n", can_measure_weight(W, X, Y, Z));
+    }
+    return 0;
+}
